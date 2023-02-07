@@ -9,7 +9,7 @@ import (
 	"net/http"
 )
 
-const Port = 8259 // http port
+const Port = 8259 // internal http port
 
 var Command = &cobra.Command{
 	Use:   "start",
@@ -23,11 +23,11 @@ var Command = &cobra.Command{
 		engine.NoRoute(controller.NoRoute)
 		api := engine.Group("/api")
 		{
-			api.GET("/api/options", controller.GetOptions)
-			api.POST("/api/refresh", controller.Refresh)
-			api.POST("/api/get", controller.Get)
-			api.PUT("/api/put", controller.Put)
-			api.POST("/api/delete", controller.Delete)
+			api.GET("/options", controller.GetOptions)
+			api.POST("/refresh", controller.Refresh)
+			api.POST("/get", controller.Get)
+			api.PUT("/put", controller.Put)
+			api.POST("/delete", controller.Delete)
 		}
 
 		return engine.Run(fmt.Sprintf(":%d", Port))
@@ -35,13 +35,7 @@ var Command = &cobra.Command{
 }
 
 func init() {
-	flagSet := Command.Flags()
-
-	flagSet.SortFlags = false
-	flagSet.StringVar(&flags.Endpoint, "endpoint", "127.0.0.1:2379", "the endpoint to connect to")
-	flagSet.StringVar(&flags.Username, "username", "", "etcd auth username")
-	flagSet.StringVar(&flags.Password, "password", "", "etcd auth password")
-	flagSet.StringVar(&flags.KeyPrefix, "key-prefix", "/", "etcd key prefix")
+	flags.Init(Command.Flags())
 }
 
 func CorsMiddleware() gin.HandlerFunc {

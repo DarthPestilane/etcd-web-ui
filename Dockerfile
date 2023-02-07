@@ -10,8 +10,6 @@ COPY front_end/dist/ /var/local/www
 COPY back_end/bin/api /bin/api
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
-RUN chmod +x /docker-entrypoint.sh
-
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["sh", "/docker-entrypoint.sh"]
 
 CMD ["nginx", "-g", "daemon off;"]

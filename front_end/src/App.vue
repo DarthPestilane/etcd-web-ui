@@ -183,7 +183,7 @@ const handleApiErr = (e) => {
               <a-input v-model:value="keyPrefix" />
             </a-form-item>
             <a-form-item>
-              <a-button type="primary" html-type="submit" @click="onRefresh">刷新</a-button>
+              <a-button type="primary" html-type="submit" @click="onRefresh">刷新 keys</a-button>
             </a-form-item>
           </a-form>
         </a-row>
@@ -251,7 +251,7 @@ const handleApiErr = (e) => {
                     <a-select-option v-for="(item) in langModes" :key="item" :value="item">{{ item }}</a-select-option>
                   </a-select>
                   <a-popconfirm :title="`确定要保存 ${etcdKeys[currEtcdKeyIdx]} ?`" @confirm="onKeyContentSave">
-                    <a-button type="primary">
+                    <a-button type="primary" v-show="currEtcdKeyIdx >= 0">
                       <template #icon>
                         <SaveOutlined />
                       </template>

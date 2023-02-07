@@ -3,6 +3,6 @@
 
 set -ex
 
-nohup /bin/api start --endpoint=$UI_ENDPOINT --username=$UI_USERNAME --password=$UI_PASSWORD --key-prefix=$UI_KEY_PREFIX &
+GIN_MODE='release' nohup /bin/api start --endpoint=$UI_ENDPOINT --username=$UI_USERNAME --password=$UI_PASSWORD --key-prefix=$UI_KEY_PREFIX &
 
 exec "$@"

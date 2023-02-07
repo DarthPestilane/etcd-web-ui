@@ -1,0 +1,7 @@
+*
+!docker-entrypoint.sh
+
+!front_end/dist
+!front_end/nginx.conf
+
+!back_end/bin
