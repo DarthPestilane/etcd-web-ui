@@ -20,13 +20,14 @@ var Command = &cobra.Command{
 		engine.Use(gin.Logger(), gin.Recovery(), CorsMiddleware())
 
 		// register routes
+		engine.NoRoute(controller.NoRoute)
+		api := engine.Group("/api")
 		{
-			engine.NoRoute(controller.NoRoute)
-			engine.GET("/options", controller.GetOptions)
-			engine.POST("/refresh", controller.Refresh)
-			engine.POST("/get", controller.Get)
-			engine.PUT("/put", controller.Put)
-			engine.POST("/delete", controller.Delete)
+			api.GET("/api/options", controller.GetOptions)
+			api.POST("/api/refresh", controller.Refresh)
+			api.POST("/api/get", controller.Get)
+			api.PUT("/api/put", controller.Put)
+			api.POST("/api/delete", controller.Delete)
 		}
 
 		return engine.Run(fmt.Sprintf(":%d", Port))
