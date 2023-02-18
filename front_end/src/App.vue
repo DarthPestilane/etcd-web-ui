@@ -2,8 +2,8 @@
 import { SaveOutlined } from '@ant-design/icons-vue';
 import { onMounted, reactive, ref } from 'vue';
 import { httpClient } from './api/api.js';
-import AceEditor from './components/AceEditor.vue';
 import { message, notification } from 'ant-design-vue';
+import AppEditor from './components/AppEditor.vue';
 
 const loading = ref(false);
 
@@ -215,8 +215,8 @@ const handleApiErr = (e) => {
               <a-col>
                 <h2>Etcd Keys</h2>
               </a-col>
-              <a-col>
-                <a-button type="primary" @click="showCreateModal = true">添加</a-button>
+              <a-col style="margin-left: 10px">
+                <a-button type="primary" @click="() => showCreateModal = true">添加</a-button>
               </a-col>
             </a-row>
             <a-row
@@ -258,17 +258,13 @@ const handleApiErr = (e) => {
                       保存
                     </a-button>
                   </a-popconfirm>
+                  <span>TTL: {{ keyTTL }}</span>
                 </a-space>
               </a-col>
             </a-row>
-            <a-row>
+            <a-row style="margin-top: 10px">
               <a-col :span="24">
-                <AceEditor v-model="keyContent" :lang-mode="usingLangMode" />
-              </a-col>
-            </a-row>
-            <a-row>
-              <a-col :span="24">
-                TTL: {{ keyTTL }}
+                <AppEditor v-model="keyContent" :lang="usingLangMode" />
               </a-col>
             </a-row>
           </a-col>
