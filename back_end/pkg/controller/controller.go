@@ -23,13 +23,10 @@ func GetOptions(c *gin.Context) {
 }
 
 func newEtcdCli(endpoint, username, password string) (*etcdCli.Client, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*15)
-	defer cancel()
 	return etcdCli.New(etcdCli.Config{
 		Endpoints: []string{endpoint},
 		Username:  username,
 		Password:  password,
-		Context:   ctx,
 	})
 }
 
@@ -38,7 +35,7 @@ func Refresh(c *gin.Context) {
 		Endpoint  string `json:"endpoint" binding:"required"`
 		Username  string `json:"username"`
 		Password  string `json:"password"`
-		KeyPrefix string `json:"keyPrefix" binding:"required"`
+		KeyPrefix string `json:"keyPrefix"`
 	}
 	if err := c.ShouldBindJSON(&req); err != nil {
 		bizio.HttpFail(c, 422, err.Error())

@@ -16,5 +16,5 @@ func Init(flagSet *pflag.FlagSet) {
 	flagSet.StringVar(&Endpoint, "endpoint", "127.0.0.1:2379", "the endpoint to connect to")
 	flagSet.StringVar(&Username, "username", "", "etcd auth username")
 	flagSet.StringVar(&Password, "password", "", "etcd auth password")
-	flagSet.StringVar(&KeyPrefix, "key-prefix", "/", "etcd key prefix")
+	flagSet.StringVar(&KeyPrefix, "key-prefix", "", "etcd key prefix")
 }
